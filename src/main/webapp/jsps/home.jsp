@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1 align="center">Welcome to KK AWS with DevOps , thanks for joining </h1>
-<h1 align="center"> KK FUNDA</h1>
+<h1 align="center"> Rakesh Ganjam</h1>
 <hr>
 <br>
 	<h1><h3> Server Side IP Address </h3><br>
