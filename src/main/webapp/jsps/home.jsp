@@ -34,7 +34,7 @@ out.println("Server Host Name :: "+inetAddress.getHostName());
 		<img src="images/kkfunda.jpg" alt="" width="100">
 	</span>
 	<span style="font-weight: bold;">
-		KK FUNDA, 
+		KK FUNDA student sandeep, 
 		Hosur, Banglore,
 		Tamil Nadu,
 		+91-9676831734,+91-9676831734
