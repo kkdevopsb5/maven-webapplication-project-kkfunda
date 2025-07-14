@@ -104,7 +104,7 @@
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>KK FUNDA Snapshot Nexus Repository </name>
-	      <url>http:/15.206.231.54:8081/repository/jiosnapshot/</url>
+	      <url>http://15.206.231.54:8081/repository/jiosnapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
