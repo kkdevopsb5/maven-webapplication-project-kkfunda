@@ -1,54 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.net.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>KK FUNDA Home Page</title>
-<link href="images/kkfunda.jpg" rel="icon">
-</head>
+<meta charset="UTF-8">
+<title>KLR | DevOps Portal</title>
+<link href="images/klr-icon.png" rel="icon">
+<style>
+    body {
+        font-family: 'Courier New', monospace;
+        background-color: #1e1e1e;
+        color: #dcdcdc;
+        margin: 0;
+        padding: 20px;
+    }
+    h1, h3 {
+        color: #00ffff;
+        text-align: center;
+    }
+    a {
+        color: #00ff00;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .container {
+        text-align: center;
+    }
+    hr {
+        border: 1px solid #444;
+    }
+    .info-box {
+        border: 1px solid #555;
+        padding: 10px;
+        margin: 20px auto;
+        width: 80%;
+        background-color: #2b2b2b;
+    }
+    small {
+        color: #888;
+    }
+</style>
 </head>
 <body>
-<h1 align="center">Welcome to KKKKKKKKKK KK DevOps</h1>
-<h1 align="center"> KK FUNDA</h1>
-<hr>
-<br>
-	<h1><h3> Server Side IP Address </h3><br>
+    <h1>Welcome to KLR DevOps</h1>
+    <h1>KLR Portal</h1>
+    <hr>
 
-<% 
-String ip = "";
-InetAddress inetAddress = InetAddress.getLocalHost();
-ip = inetAddress.getHostAddress();
-out.println("Server Host Name :: "+inetAddress.getHostName()); 
-%>
-<br>
-<%out.println("Server IP Address :: "+ip);%>
-</h1>
-<br>
-<h1><h3> Client Side IP Address </h3><br>
-<%out.print( "Client IP Address :: " + request.getRemoteAddr() ); %><br>
-<%out.print( "Client Name Host :: "+ request.getRemoteHost() );%><br></h1>
-<hr>
-<div style="text-align: center;">
-	<span>
-		<img src="images/kkfunda.jpg" alt="" width="100">
-	</span>
-	<span style="font-weight: bold;">
-		KK FUNDA, 
-		Martha Halli, Banglore,
-		Bangalore,
-		+91-9676831734,+91-9676831734
-		kkeducationblr@gmail.com
-		<br>
-		<a href="mailto:kkeducation@gmail.com">Mail to KK FUNDA</a>
-	</span>
-</div>
-<hr>
-	<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
-<hr>
-<hr>
-<p align=center>KK FUNDA Training, Development Center.</p>
-<p align=center><small>Copyrights 2024 by <a href="google.com/">KK FUNDA</a> </small></p>
+    <div class="info-box">
+        <h3>Server Side IP Address</h3>
+        <%
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            String ip = inetAddress.getHostAddress();
+            out.println("Server Host Name :: " + inetAddress.getHostName() + "<br>");
+            out.println("Server IP Address :: " + ip);
+        %>
+    </div>
 
+    <div class="info-box">
+        <h3>Client Side IP Address</h3>
+        <%
+            out.print("Client IP Address :: " + request.getRemoteAddr() + "<br>");
+            out.print("Client Host Name :: " + request.getRemoteHost());
+        %>
+    </div>
+
+    <hr>
+    <div class="container">
+        <img src="images/klr-icon.png" alt="KLR Logo" width="100"><br>
+        <strong>
+            KLR, Martha Halli, Bangalore<br>
+            📞 +91-9676831734<br>
+            ✉️ <a href="mailto:klredu@gmail.com">klredu@gmail.com</a>
+        </strong>
+    </div>
+
+    <hr>
+    <p>🔧 Service : <a href="services/employee/getEmployeeDetails">Get Employee Details</a></p>
+    <hr>
+    <p align="center">KLR Training & Development Center</p>
+    <p align="center"><small>Copyright © 2024 by <a href="https://google.com/">KLR</a></small></p>
 </body>
 </html>
