@@ -1,124 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.net.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>KLR | DevOps Innovation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="images/klr-icon.png" rel="icon">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #f0f0f0;
-    }
-
-    header {
-      padding: 30px 20px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #444;
-    }
-
-    header h1 {
-      font-size: 48px;
-      margin: 0;
-      font-weight: bold;
-      color: #00ffff;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    header h2 {
-      font-size: 28px;
-      margin-top: 5px;
-      color: #00ff88;
-    }
-
-    .info-section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    }
-
-    .info-section h3 {
-      border-bottom: 1px solid #555;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-      font-size: 22px;
-      color: #00ffcc;
-    }
-
-    .info-section p {
-      font-size: 16px;
-      margin: 5px 0;
-    }
-
-    .contact {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .contact img {
-      width: 120px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-
-    .contact a {
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 14px;
-      color: #aaa;
-      border-top: 1px solid #444;
-    }
-  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>KK FUNDA Home Page</title>
+<link href="images/kkfunda.jpg" rel="icon">
 </head>
-
+</head>
 <body>
-  <header>
-    <h1>KLR DevOps</h1>
-    <h2>Innovating Your Digital Backbone</h2>
-  </header>
+<h1 align="center">Welcome to KKKKKKKKKK KK DevOps</h1>
+<h1 align="center"> KK FUNDA</h1>
+<hr>
+<br>
+	<h1><h3> Server Side IP Address </h3><br>
 
-  <div class="info-section">
-    <h3>🔧 Server Details</h3>
-    <%
-      InetAddress inetAddress = InetAddress.getLocalHost();
-      String ip = inetAddress.getHostAddress();
-      out.println("<p>Server Host Name: " + inetAddress.getHostName() + "</p>");
-      out.println("<p>Server IP Address: " + ip + "</p>");
-    %>
+<% 
+String ip = "";
+InetAddress inetAddress = InetAddress.getLocalHost();
+ip = inetAddress.getHostAddress();
+out.println("Server Host Name :: "+inetAddress.getHostName()); 
+%>
+<br>
+<%out.println("Server IP Address :: "+ip);%>
+</h1>
+<br>
+<h1><h3> Client Side IP Address </h3><br>
+<%out.print( "Client IP Address :: " + request.getRemoteAddr() ); %><br>
+<%out.print( "Client Name Host :: "+ request.getRemoteHost() );%><br></h1>
+<hr>
+<div style="text-align: center;">
+	<span>
+		<img src="images/kkfunda.jpg" alt="" width="100">
+	</span>
+	<span style="font-weight: bold;">
+		KK FUNDA, 
+		Martha Halli, Banglore,
+		Bangalore,
+		+91-9676831734,+91-9676831734
+		kkeducationblr@gmail.com
+		<br>
+		<a href="mailto:kkeducation@gmail.com">Mail to KK FUNDA</a>
+	</span>
+</div>
+<hr>
+	<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
+<hr>
+<hr>
+<p align=center>KK FUNDA Training, Development Center.</p>
+<p align=center><small>Copyrights 2024 by <a href="google.com/">KK FUNDA</a> </small></p>
 
-    <h3>🌐 Client Details</h3>
-    <%
-      out.println("<p>Client IP Address: " + request.getRemoteAddr() + "</p>");
-      out.println("<p>Client Host Name: " + request.getRemoteHost() + "</p>");
-    %>
-  </div>
-
-  <div class="contact">
-    <img src="images/klr-icon.png" alt="KLR Logo">
-    <p><strong>KLR, Martha Halli, Bangalore</strong></p>
-    <p>📞 +91-9676831734</p>
-    <p>📧 <a href="mailto:klredu@gmail.com">klredu@gmail.com</a></p>
-  </div>
-
-  <footer>
-    <p>Service: <a href="services/employee/getEmployeeDetails">Get Employee Details</a></p>
-    <p>&copy; 2024 KLR Training & Development Center | <a href="https://google.com/">KLR</a></p>
-  </footer>
 </body>
 </html>
