@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to KK DevOps</h1>
+<h1 align="center">Welcome to KKk DevOps</h1>
 <h1 align="center"> KK DEVOPS WITH AWS NEW BATCH CLASSES STARTS ON 18th AUG 8 PM   </h1>
 <hr>
 <br>
