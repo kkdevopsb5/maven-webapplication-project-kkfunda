@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>KK FUNDA Home Page</title>
+<title>MS GROUP Home Page</title>
 <link rel="icon" href="images/kkfunda.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
