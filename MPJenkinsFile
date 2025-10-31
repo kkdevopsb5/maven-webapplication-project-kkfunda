@@ -1,0 +1,110 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "maven 3.9.8"
+    }
+
+    triggers {
+        githubPush()
+        // cron('*/5 * * * *')
+        // pollSCM('* * * * *')
+    }
+
+    parameters 
+    {
+        choice(name: 'branchNames', choices: ['master', 'dev', 'qa','f1'], description: 'Select the branch to build from')
+    }
+
+    stages {
+        stage('Main Pipeline Execution') {
+            steps {
+                script {
+                    try {
+                        // Start Notification
+                        notifyBuild('STARTED')
+
+                        // Git Checkout
+                        stage('Git Checkout') {
+                            git branch: params.branchNames, credentialsId: '6af083e0-dcd0-4ed5-bb9c-53952b6f3b23', url: 'https://github.com/mail2spd04/KKweb-project-kkfunda.git'
+                        }
+
+                        // Compile
+                        stage('Compile') {
+                            sh "mvn clean compile"
+                        }
+
+                        // Build
+                        stage('Build') {
+                            sh "mvn package"
+                        }
+
+                        // SonarQube
+                        stage('SonarQube') {
+                            sh "mvn sonar:sonar"
+                        }
+
+                        // Deploy to Nexus
+                        stage('Deploy to Nexus') {
+                            sh "mvn deploy"
+                        }
+
+                        // Deploy to Tomcat
+                        stage('Deploy to Tomcat') {
+                            sh """
+                                curl -u sairhel:password \
+                                --upload-file /var/lib/jenkins/workspace/dPipeLineTry/target/maven-web-application.war \
+                                "http://52.66.248.84:8080/manager/text/deploy?path=/maven-Dweb-application&update=true"
+                            """
+                        }
+
+                        currentBuild.result = 'SUCCESS'
+
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        echo "Error occurred: ${err}"
+                        throw err
+                    } finally {
+                        echo "Running final cleanup..."
+                        notifyBuild(currentBuild.result)
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                notifyBuild(currentBuild.result)
+            }
+        }
+        failure {
+            script {
+                notifyBuild(currentBuild.result)
+            }
+        }
+    }
+}
+
+def notifyBuild(String buildStatus = 'STARTED') {
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    def colorCode = '#FF0000' // default to red
+
+    def subject = "${buildStatus}: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]"
+    def summary = "${subject} (${env.BUILD_URL})"
+
+    switch (buildStatus) {
+        case 'STARTED':
+            colorCode = '#FFFF00' // Yellow
+            break
+        case 'SUCCESS':
+            colorCode = '#00FF00' // Green
+            break
+        default:
+            colorCode = '#FF0000' // Red
+    }
+
+    slackSend(color: colorCode, message: summary, channel: '#new-maven')
+}
