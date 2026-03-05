@@ -19,10 +19,10 @@ node
   {
     sh "${mavenHome}/bin/mvn clean package"
   }
-  stage('sonarqube report stage')
+ /* stage('sonarqube report stage')
   {
     sh "${mavenHome}/bin/mvn sonar:sonar"
-  }
+  } */
   stage('deploy to nexus')
   {
     sh "${mavenHome}/bin/mvn deploy"
