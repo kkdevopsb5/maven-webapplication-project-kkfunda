@@ -11,7 +11,6 @@ node
     try
     {
 
-  def mavenHome = tool name:"maven-3.9.6"
   stage('git checkout')
   {
   git branch: 'development', url: 'https://github.com/joeldepuri/maven-webapplication-project-kkfunda.git'
