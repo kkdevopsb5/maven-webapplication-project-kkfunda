@@ -1,38 +1,97 @@
 pipeline {
     agent any
-    tools{
-        maven "maven-3.9.6"
+    tools
+    {
+      maven "maven-3.9.6"
     }
+     stages
+     {
+        stage('git checkout')
+        {
+          steps
+          {
+             notifyBuild('STARTED')
+             git branch: 'development', url: 'https://github.com/joeldepuri/maven-webapplication-project-kkfunda.git'
+          }
+        } //stage  close
+        stage('build')
+        {
+        steps
+        {
+           sh "mvn clean package"
+        }
+        }  //stage close
+        stage('SQ Report')
+        {
+           steps
+           {
+           sh "mvn sonar:sonar"
+           }
+        } //stage ending
+        stage('Uploadinto Nexus')
+        {
+           steps
+           {
+              sh "mvn deploy"
+           }
+        }  //stage ending
 
-    stages {
-        stage('git checkout') {
-            steps {
-                git branch: 'development', url: 'https://github.com/joeldepuri/maven-webapplication-project-kkfunda.git'
-            }
-        }
-        stage('build stage'){
-            steps{
-                sh "mvn clean package"
-            }
-        }
-        stage('SQ report'){
-            steps{
-                sh "mvn sonar:sonar"
-            }
-        }
-        stage('Upload into Nexus'){
-            steps{
-                sh "mvn deploy"
-            }
-        }
-        stage('Deploy into tomcat'){
-            steps{
-                 sh """
+        stage('tomcat deploy')
+        {
+        steps {
+                sh """
             curl -u kk:password \
             --upload-file /var/lib/jenkins/workspace/jio-Declarative-PL-dev/target/maven-web-application.war \
             "http://3.22.208.219:8080/manager/text/deploy?path=/maven-web-application&update=true"
         """
             }
-        }
-             }//stages closing
-} //pipeline closing
+        }  //stage ending
+
+     }  // stages closing
+
+
+
+post {
+  success {
+
+    script
+    {
+     notifyBuild(currentBuild.result)
+    }
+    
+  }
+  failure {
+
+  script
+  {
+    notifyBuild(currentBuild.result)
+
+  }
+   
+  }
+}
+
+
+} // pipeline ending
+
+// Notification method
+def notifyBuild(String buildStatus = 'STARTED') {
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    def colorCode
+    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    def summary = "${subject} (${env.BUILD_URL})"
+
+    switch (buildStatus) {
+        case 'STARTED':
+            colorCode = '#FFFF00' // Yellow
+            break
+        case 'SUCCESS':
+            colorCode = '#00FF00' // Green
+            break
+        default:
+            colorCode = '#FF0000' // Red
+    }
+
+    slackSend(color: colorCode, message: summary)
+}
